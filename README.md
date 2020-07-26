@@ -5,23 +5,32 @@ There is a continuous stream of user activity events generated from multiple use
 
 
 # Technologies used
-- Django: The web framework for perfectionists with deadlines (Django builds better web apps with less code).
-- DRF: A powerful and flexible toolkit for building Web APIs
-- Celery: It’s a task queue with focus on real-time processing, while also supporting task scheduling.
+- [Django](https://www.djangoproject.com/): The web framework for perfectionists with deadlines (Django builds better web apps with less code).
+- [DRF](https://www.django-rest-framework.org/): A powerful and flexible toolkit for building Web APIs
+- [Celery](https://docs.celeryproject.org/en/stable/): It’s a task queue with focus on real-time processing, while also supporting task scheduling.
 
 # Docker images used
-- frolvlad/alpine-python3 - for base image
-- rabbitmq:3-management - for celery
+- [frolvlad/alpine-python3](https://hub.docker.com/r/frolvlad/alpine-python3) - for base image
+- [rabbitmq:3-management](https://hub.docker.com/_/rabbitmq) - for celery
 
 # Installation
+- Run rabbitmq server
+> $ docker run --rm -it --hostname my-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 - Clone repo & cd to project directory
-> $ cd cube 
-- Rename settings.ini.example & update values in settings.ini
+> $ cd cube
+- Get docker bridge ip for connecting to rabbitmq server
+> ifconfig docker0 | grep netmask | awk {'print $2'} 
+- Rename settings.ini.example & update values in settings.ini (update above ip here in CELERY_BROKER_URL)
 > $ mv settings.ini.example settings.ini; vim settings.ini
-- Run install script, it'll install docker (if not installed), build project docker image & run along with rabbitmq-server docker image
-> $ bash install.sh
+- Create local directory to mount with container
+> $ mkdir -p /tmp/cubefiles
+- Create docker image
+> $ docker build -t cubeapp:v1 .
+- Run cube api server
+> $ docker run -v /tmp/cubefiles:/tmp/cubefiles -it -p 8000:8000 cubeapp:v1
 
-# API call
+
+# Event API
 - Example request for Bill Pay
 > curl -X POST \
   http://localhost:8000/event/trigger/ \
