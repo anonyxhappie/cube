@@ -25,9 +25,9 @@ There is a continuous stream of user activity events generated from multiple use
 > $ docker run --rm -it --hostname my-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 - Clone repo & cd to project directory
 > $ git clone https://github.com/anonyxhappie/cube.git; cd cube
-- Get docker bridge ip for connecting to rabbitmq server
-> ifconfig docker0 | grep netmask | awk {'print $2'} 
-- Rename settings.ini.example & update values in settings.ini (update above ip here in CELERY_BROKER_URL)
+- Get docker gateway ip in case different from 172.17.0.1, required for connecting to rabbitmq server
+> docker inspect $(docker ps | grep rabbitmq | awk '{print $1}') | grep Gateway | awk 'NR==1{print $2}' | cut -d'"' -f 2 
+- Rename settings.ini.example & update values in settings.ini (update above ip here in CELERY_BROKER_URL if different)
 > $ mv settings.ini.example settings.ini; vim settings.ini
 - Create local directory to mount with container
 > $ mkdir -p /tmp/cubefiles
