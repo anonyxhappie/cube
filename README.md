@@ -58,7 +58,7 @@ curl -X POST \
 ```
 - Example request for Feedback Post
 ```
-curl -X POST 
+curl -X POST \
   http://localhost:8000/event/trigger/ \
   -H 'content-type: application/json' \
   -d '{
