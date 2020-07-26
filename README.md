@@ -32,26 +32,28 @@ There is a continuous stream of user activity events generated from multiple use
 
 # Event API
 - Example request for Bill Pay
-> curl -X POST \
+```
+curl -X POST \
   http://localhost:8000/event/trigger/ \
   -H 'content-type: application/json' \
   -d '{
-	"noun": "bill", 
-	"userid": 178765, 
-	"ts": "20200725 124500", 
-	"latlong": "19.07,72.87", 
-	"verb": "pay",
-	"timespent": 72, 
-	"properties": {
-		"bank": "hdfc", 
-		"merchantid": 234, 
-		"value": 139.5, 
-		"mode": "netbank"
-	}
-    }'
-
+		"noun": "bill", 
+		"userid": 178765, 
+		"ts": "20200725 124500", 
+		"latlong": "19.07,72.87", 
+		"verb": "pay",
+		"timespent": 72, 
+		"properties": {
+			"bank": "hdfc", 
+			"merchantid": 234, 
+			"value": 139.5, 
+			"mode": "netbank"
+		}
+	}'
+```
 - Example request for Feedback Post
-> curl -X POST \
+```
+curl -X POST 
   http://localhost:8000/event/trigger/ \
   -H 'content-type: application/json' \
   -d '{
@@ -65,13 +67,14 @@ There is a continuous stream of user activity events generated from multiple use
         "text": "the bank page took too long to load"
         }
     }'
-
+```
 - Example response
-> {
+```
+{
     "status": 200,
     "message": "Event triggered."
 }
-
+```
 
 # Check logs
 > $ tail -f /tmp/cubefiles/cube_project_debug.log
