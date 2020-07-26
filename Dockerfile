@@ -48,4 +48,4 @@ EXPOSE 8000
 
 # default command to execute      
 
-CMD python3 /cube/cube_project/manage.py runserver 0.0.0.0:8000 & celery -A cube_project worker -l info &
+CMD python3 /cube/cube_project/manage.py runserver --insecure 0.0.0.0:8000 & celery -A cube_project worker -l info
