@@ -3,11 +3,14 @@ This project is aimed to design and implement a Business rules framework on even
 
 There is a continuous stream of user activity events generated from multiple users as they use our mobile app. Objective is to implement a server to ingest these events. The server will expose a http end-point to which the events would be posted. Also the server will contain an admin interface to specify business rules, that alert the operator or trigger an action (like sending an alert sms to the end user), when certain criteria is met.
 
+# Application architecture
+![Cube-Design](https://github.com/anonyxhappie/cube/blob/master/Cube-Design.jpg?raw=true)
 
 # Technologies used
 - [Django](https://www.djangoproject.com/): The web framework for perfectionists with deadlines (Django builds better web apps with less code).
 - [DRF](https://www.django-rest-framework.org/): A powerful and flexible toolkit for building Web APIs
 - [Celery](https://docs.celeryproject.org/en/stable/): It’s a task queue with focus on real-time processing, while also supporting task scheduling.
+- [RabbitMQ](https://www.rabbitmq.com/): A message-broker software that originally implemented the Advanced Message Queuing Protocol. 
 
 # Docker images used
 - [frolvlad/alpine-python3](https://hub.docker.com/r/frolvlad/alpine-python3) - for base image
